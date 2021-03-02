@@ -1,0 +1,53 @@
+wrapper {
+    gradleVersion = '6.5.1'
+}
+
+allprojects {
+    group = pGroup
+    version = pVersion
+}
+
+ext.libraries = [
+    project(':nomioc-luqe'),
+    project(':nomioc-processing'),
+    project(':nomioc-setup'),
+]
+ext.other = [
+    project(':nomioc-cli'),
+    project(':nomioc-setup-cli'),
+]
+
+configure(libraries) {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    artifacts {
+        archives sourcesJar
+    }
+}
+
+configure(other) {
+    apply plugin: 'java'
+}
+
+subprojects {
+    apply plugin: 'eclipse'
+
+    repositories {
+        maven {
+            url 'https://mvn.topobyte.de'
+        }
+        maven {
+            url 'https://mvn.slimjars.com'
+        }
+        mavenCentral()
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}

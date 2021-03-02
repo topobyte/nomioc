@@ -1,0 +1,6 @@
+include 'luqe', 'cli', 'processing', 'setup', 'setup-cli'
+project(':luqe').name = 'nomioc-luqe'
+project(':cli').name = 'nomioc-cli'
+project(':processing').name = 'nomioc-processing'
+project(':setup').name = 'nomioc-setup'
+project(':setup-cli').name = 'nomioc-setup-cli'
