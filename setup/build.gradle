@@ -3,8 +3,56 @@ if (project.hasProperty("topobyte")) {
         + '/.gradle/topobyte.gradle'
 }
 
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'https://mvn.topobyte.de' }
+    }
+    dependencies {
+        classpath 'de.topobyte:gradle-xmlbeans-plugin:0.0.1'
+    }
+}
+
+apply plugin: 'de.topobyte.xmlbeans-gradle-plugin'
+
+xmlBeans {
+    input = []
+    input += 'nomioc.xsd'
+}
+
 dependencies {
     api project(':nomioc-processing')
+
+    api 'de.topobyte:commons-cli-helper:0.1.0'
+    api 'de.topobyte:osm4j-core:1.2.0'
+    api 'de.topobyte:osm4j-incubating:1.2.0'
+    api 'de.topobyte:adt-multicollections:0.0.4'
+    api 'de.topobyte:jts-indexing:0.3.2'
+    api 'de.topobyte:geomath:0.1.0'
+    api 'de.topobyte:luqe-jdbc:0.2.1'
+    api 'de.topobyte:melon-paths:0.0.3'
+    api 'de.topobyte:guava-utils:0.0.2'
+    api 'de.topobyte:simple-mapfile-xml:0.1.0'
+    api 'de.topobyte:sqlite-spatial:0.2.0'
+    api 'de.topobyte:sqlite-utils:0.1.0'
+    api 'de.topobyte:various-utils:0.1.0'
+    api 'de.topobyte:hibernate-sqlite:0.1.0'
+    api 'de.topobyte:diacritic-utils:0.1.0'
+
+    api 'com.jakewharton.fliptables:fliptables:1.0.2'
+
+    api 'org.apache.xmlbeans:xmlbeans:3.0.2'
+
+    api 'org.slf4j:slf4j-api:1.6.1'
+
+    testImplementation 'de.topobyte:melon-resources:0.0.1'
+    testImplementation 'de.topobyte:system-utils:0.0.1'
+    testImplementation 'junit:junit:4.12'
+
+    testRuntimeOnly 'org.xerial:sqlite-jdbc:3.8.9.1'
+
+    testRuntimeOnly 'org.slf4j:slf4j-log4j12:1.6.1'
+    testRuntimeOnly 'log4j:log4j:1.2.16'
 }
 
 publishing {

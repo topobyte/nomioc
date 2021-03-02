@@ -1,0 +1,70 @@
+<xs:schema
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:po="http://topobyte.de/nomioc/android/v2/config/parser"
+   targetNamespace="http://topobyte.de/nomioc/android/v2/config/parser"
+   elementFormDefault="qualified">
+
+  <xs:element name="config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="map" type="po:map" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="filter" type="po:filter" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="ignore" type="po:ignore" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="map">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="classes" type="po:classes"/>
+        <xs:element name="class" type="po:class"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="key" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="filter">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="map" type="po:map" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="filter" type="po:filter" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="key" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:simpleType name="name-restriction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="none" />
+      <xs:enumeration value="maybe" />
+      <xs:enumeration value="required" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="classes">
+    <xs:attribute name="values" type="xs:string"/>
+    <xs:attribute name="cat" type="xs:string"/>
+    <xs:attribute name="name" type="po:name-restriction"/>
+    <xs:attribute name="forcesingle" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="class">
+    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="cat" type="xs:string"/>
+    <xs:attribute name="names" type="xs:string"/>
+    <xs:attribute name="name" type="po:name-restriction"/>
+    <xs:attribute name="forcesingle" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="ignore">
+    <xs:attribute name="key" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="nocase" type="xs:boolean"/>
+    <xs:attribute name="pattern" type="xs:string"/>
+  </xs:complexType>
+
+</xs:schema>

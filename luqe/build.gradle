@@ -4,6 +4,22 @@ if (project.hasProperty("topobyte")) {
 }
 
 dependencies {
+    api 'de.topobyte:adt-geo:0.1.0'
+    api 'de.topobyte:luqe-core:0.1.0'
+    api 'de.topobyte:geomath:0.1.0'
+    api 'de.topobyte:sqlite-spatial:0.2.0'
+
+    api 'com.slimjars.trove4j:trove4j-int-object-hash-map:1.0.1'
+    api 'com.slimjars.trove4j:trove4j-int-list:1.0.1'
+
+    testImplementation 'de.topobyte:system-utils:0.0.1'
+    testImplementation 'de.topobyte:luqe-jdbc:0.1.0'
+    testImplementation 'junit:junit:4.12'
+
+    testRuntimeOnly 'org.xerial:sqlite-jdbc:3.8.11.2'
+
+    testRuntimeOnly 'org.slf4j:slf4j-log4j12:1.6.1'
+    testRuntimeOnly 'log4j:log4j:1.2.16'
 }
 
 publishing {

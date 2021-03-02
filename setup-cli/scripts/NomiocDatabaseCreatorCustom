@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DIR=$(dirname $0)
+CMD="$DIR/nomioc-setup-cli.sh"
+CLASS="de.topobyte.nomioc.executables.android.DatabaseCreatorCustom"
+
+
+exec "$CMD" "$CLASS" "$@"
