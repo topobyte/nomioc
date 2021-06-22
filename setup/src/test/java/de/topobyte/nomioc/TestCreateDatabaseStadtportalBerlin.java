@@ -47,8 +47,8 @@ public class TestCreateDatabaseStadtportalBerlin
 		Path baseWayDb = pathTemp.resolve("nomioc.waydb");
 
 		CreateDatabaseCustom filter = new CreateDatabaseCustom();
-		filter.setup(pathInput, pathBoundary, pathOutput, pathPoiConfig, null,
-				updateOnly, baseNodeDb, baseWayDb);
+		filter.setup(pathInput, pathBoundary, null, pathOutput, pathPoiConfig,
+				null, updateOnly, baseNodeDb, baseWayDb);
 		filter.prepare();
 		filter.execute();
 	}

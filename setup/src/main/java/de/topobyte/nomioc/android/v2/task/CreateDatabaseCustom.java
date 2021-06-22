@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import de.topobyte.melon.io.ModTimes;
 import de.topobyte.melon.paths.PathUtil;
 import de.topobyte.nomioc.android.v2.regions.Regions;
+import de.topobyte.nomioc.android.v2.regions.RegionsUtil;
 import de.topobyte.osm4j.diskstorage.DbExtensions;
 import de.topobyte.osm4j.diskstorage.EntityDbSetup;
 import de.topobyte.osm4j.utils.FileFormat;
@@ -51,6 +52,7 @@ public class CreateDatabaseCustom
 	private Path failures;
 	private Path inputFile;
 	private Path boundaryFile;
+	private Path regionsDir;
 	private Path nodeDbDataFile;
 	private Path nodeDbIndexFile;
 	private Path wayDbDataFile;
@@ -63,12 +65,13 @@ public class CreateDatabaseCustom
 	private Path basenameNodeDb;
 	private Path basenameWayDb;
 
-	public void setup(Path input, Path boundary, Path output,
+	public void setup(Path input, Path boundary, Path regions, Path output,
 			Path pathPoiConfig, String pathFailingIntersections,
 			boolean updateOnly, Path basenameNodeDb, Path basenameWayDb)
 	{
 		this.inputFile = input;
 		this.boundaryFile = boundary;
+		this.regionsDir = regions;
 		this.databaseFile = output;
 		this.basenameNodeDb = basenameNodeDb;
 		this.basenameWayDb = basenameWayDb;
@@ -190,6 +193,9 @@ public class CreateDatabaseCustom
 		}
 
 		Regions regions = new Regions();
+		if (regionsDir != null) {
+			regions = RegionsUtil.loadFromDirectory(regionsDir);
+		}
 
 		/*
 		 * Create database

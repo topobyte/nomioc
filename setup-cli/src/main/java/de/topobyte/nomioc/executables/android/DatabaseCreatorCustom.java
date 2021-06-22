@@ -44,6 +44,7 @@ public class DatabaseCreatorCustom
 
 	final static String OPTION_INPUT = "input";
 	final static String OPTION_BOUNDARY = "boundary";
+	final static String OPTION_REGIONS = "regions";
 	final static String OPTION_CONFIG = "config";
 	final static String OPTION_OUTPUT = "output";
 	final static String OPTION_NODEDB = "node-db";
@@ -56,6 +57,7 @@ public class DatabaseCreatorCustom
 		// @formatter:off
 		OptionHelper.addL(options, OPTION_INPUT, true, true, "file", "input");
 		OptionHelper.addL(options, OPTION_BOUNDARY, true, true, "file", "boundary");
+		OptionHelper.addL(options, OPTION_REGIONS, true, false, "directory", "regions (admin boundaries and postal codes)");
 		OptionHelper.addL(options, OPTION_CONFIG, true, true, "file", "config");
 		OptionHelper.addL(options, OPTION_OUTPUT, true, true, "directory", "where to put the results");
 		OptionHelper.addL(options, OPTION_NODEDB, true, true, "basename", "node database");
@@ -69,6 +71,7 @@ public class DatabaseCreatorCustom
 	{
 		public String pathInput;
 		public String pathBoundary;
+		public String pathRegions;
 		public String pathConfig;
 		public String pathOutput;
 		public String pathNodeDB;
@@ -83,6 +86,7 @@ public class DatabaseCreatorCustom
 
 		args.pathInput = line.getOptionValue(OPTION_INPUT);
 		args.pathBoundary = line.getOptionValue(OPTION_BOUNDARY);
+		args.pathRegions = line.getOptionValue(OPTION_REGIONS);
 		args.pathConfig = line.getOptionValue(OPTION_CONFIG);
 		args.pathOutput = line.getOptionValue(OPTION_OUTPUT);
 		args.pathNodeDB = line.getOptionValue(OPTION_NODEDB);
@@ -118,6 +122,7 @@ public class DatabaseCreatorCustom
 		CreateDatabaseCustom task = new CreateDatabaseCustom();
 		task.setup(Paths.get(arguments.pathInput),
 				Paths.get(arguments.pathBoundary),
+				Paths.get(arguments.pathRegions),
 				Paths.get(arguments.pathOutput),
 				Paths.get(arguments.pathConfig),
 				arguments.pathFailingIntersections, arguments.updateOnly,
