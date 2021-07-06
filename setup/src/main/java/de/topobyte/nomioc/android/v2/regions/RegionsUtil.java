@@ -37,6 +37,7 @@ import org.locationtech.jts.triangulate.VoronoiDiagramBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.topobyte.jts.utils.PolygonHelper;
 import de.topobyte.nomioc.android.v2.division.DivisionConfig;
 import de.topobyte.nomioc.android.v2.model.hibernate.Borough;
 import de.topobyte.nomioc.android.v2.model.hibernate.PostalCode;
@@ -69,6 +70,13 @@ public class RegionsUtil
 			try {
 				EntityFile entity = SmxFileReader.read(file);
 				Geometry boundary = entity.getGeometry();
+
+				boundary = PolygonHelper.polygonal(boundary);
+				if (boundary == null) {
+					System.out.println("Unable to dissolve collection");
+					continue;
+				}
+
 				Map<String, String> tags = entity.getTags();
 				String valBoundary = tags.get("boundary");
 				if (valBoundary == null) {
