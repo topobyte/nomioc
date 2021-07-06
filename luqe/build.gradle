@@ -5,7 +5,7 @@ if (project.hasProperty("topobyte")) {
 
 dependencies {
     api 'de.topobyte:adt-geo:0.1.0'
-    api 'de.topobyte:luqe-core:0.1.0'
+    api 'de.topobyte:luqe-core:0.2.1'
     api 'de.topobyte:geomath:0.1.0'
     api 'de.topobyte:sqlite-spatial:0.2.0'
 
@@ -13,7 +13,7 @@ dependencies {
     api 'com.slimjars.trove4j:trove4j-int-list:1.0.1'
 
     testImplementation 'de.topobyte:system-utils:0.0.1'
-    testImplementation 'de.topobyte:luqe-jdbc:0.1.0'
+    testImplementation 'de.topobyte:luqe-jdbc:0.2.1'
     testImplementation 'junit:junit:4.12'
 
     testRuntimeOnly 'org.xerial:sqlite-jdbc:3.8.11.2'
