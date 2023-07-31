@@ -178,6 +178,7 @@ public class StreetBuilder implements OsmEntityGeometryHandler
 				new SpatialIndexFactoryStreet());
 
 		for (Street street : streets) {
+			System.out.println("persist street");
 			sfOutput.getCurrentSession().persist(street);
 		}
 	}

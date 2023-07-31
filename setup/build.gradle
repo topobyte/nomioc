@@ -36,9 +36,14 @@ dependencies {
     api 'de.topobyte:sqlite-spatial:0.2.0'
     api 'de.topobyte:sqlite-utils:0.1.0'
     api 'de.topobyte:various-utils:0.1.0'
-    api 'de.topobyte:hibernate-sqlite:0.1.0'
     api 'de.topobyte:diacritic-utils:0.1.0'
     api 'de.topobyte:jts-utils:0.4.0'
+
+    api 'org.hibernate:hibernate-core:6.2.7.Final'
+    api 'org.hibernate:hibernate-ant:6.2.7.Final'
+    api 'org.hibernate:hibernate-c3p0:6.2.7.Final'
+    api 'org.hibernate.common:hibernate-commons-annotations:6.0.6.Final'
+    api 'org.hibernate.orm:hibernate-community-dialects:6.2.7.Final'
 
     api 'com.jakewharton.fliptables:fliptables:1.0.2'
 
@@ -50,7 +55,7 @@ dependencies {
     testImplementation 'de.topobyte:system-utils:0.0.1'
     testImplementation 'junit:junit:4.12'
 
-    testRuntimeOnly 'org.xerial:sqlite-jdbc:3.8.9.1'
+    testRuntimeOnly 'org.xerial:sqlite-jdbc:3.42.0.0'
 
     testRuntimeOnly 'org.slf4j:slf4j-log4j12:1.6.1'
     testRuntimeOnly 'log4j:log4j:1.2.16'

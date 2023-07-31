@@ -23,6 +23,16 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+import de.topobyte.nomioc.android.v2.model.hibernate.Borough;
+import de.topobyte.nomioc.android.v2.model.hibernate.BoroughSet;
+import de.topobyte.nomioc.android.v2.model.hibernate.PoiType;
+import de.topobyte.nomioc.android.v2.model.hibernate.PointOfInterest;
+import de.topobyte.nomioc.android.v2.model.hibernate.PostalCode;
+import de.topobyte.nomioc.android.v2.model.hibernate.PostalCodeSet;
+import de.topobyte.nomioc.android.v2.model.hibernate.SpatialIndexItemPoi;
+import de.topobyte.nomioc.android.v2.model.hibernate.SpatialIndexItemStreet;
+import de.topobyte.nomioc.android.v2.model.hibernate.Street;
+
 /**
  * @author Sebastian Kuerten (sebastian.kuerten@fu-berlin.de)
  */
@@ -47,6 +57,16 @@ public class AndroidSessionFactory
 		}
 
 		cfg.configure(configPath);
+
+		cfg.addAnnotatedClass(Borough.class);
+		cfg.addAnnotatedClass(BoroughSet.class);
+		cfg.addAnnotatedClass(PostalCode.class);
+		cfg.addAnnotatedClass(PostalCodeSet.class);
+		cfg.addAnnotatedClass(Street.class);
+		cfg.addAnnotatedClass(PoiType.class);
+		cfg.addAnnotatedClass(PointOfInterest.class);
+		cfg.addAnnotatedClass(SpatialIndexItemStreet.class);
+		cfg.addAnnotatedClass(SpatialIndexItemPoi.class);
 
 		serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(cfg.getProperties()).build();

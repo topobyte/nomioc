@@ -43,6 +43,7 @@ public class HibernateIndexBuilder
 			Rectangle r = leaf.getEnvelope();
 			SpatialIndexItem item = factory.create(i, r.getMinX(), r.getMaxX(),
 					r.getMinY(), r.getMaxY());
+			System.out.println("persist!");
 			sfOutput.getCurrentSession().persist(item);
 
 			List<T> leafItems = leaf.getItems();

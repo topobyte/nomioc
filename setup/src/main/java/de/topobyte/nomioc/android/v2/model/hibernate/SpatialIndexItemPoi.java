@@ -17,8 +17,8 @@
 
 package de.topobyte.nomioc.android.v2.model.hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "si_pois")
