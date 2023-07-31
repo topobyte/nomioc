@@ -9,7 +9,7 @@ buildscript {
         maven { url 'https://mvn.topobyte.de' }
     }
     dependencies {
-        classpath 'de.topobyte:gradle-xmlbeans-plugin:0.0.1'
+        classpath 'de.topobyte:gradle-xmlbeans-plugin:0.1.0'
     }
 }
 
