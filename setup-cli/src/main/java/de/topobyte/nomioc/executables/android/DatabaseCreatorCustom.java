@@ -18,6 +18,7 @@
 package de.topobyte.nomioc.executables.android;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.commons.cli.CommandLine;
@@ -119,10 +120,12 @@ public class DatabaseCreatorCustom
 
 		Arguments arguments = parse(commandLine);
 
+		Path pathRegions = arguments.pathRegions == null ? null
+				: Paths.get(arguments.pathRegions);
+
 		CreateDatabaseCustom task = new CreateDatabaseCustom();
 		task.setup(Paths.get(arguments.pathInput),
-				Paths.get(arguments.pathBoundary),
-				Paths.get(arguments.pathRegions),
+				Paths.get(arguments.pathBoundary), pathRegions,
 				Paths.get(arguments.pathOutput),
 				Paths.get(arguments.pathConfig),
 				arguments.pathFailingIntersections, arguments.updateOnly,
