@@ -22,6 +22,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -41,11 +42,11 @@ import javax.persistence.Table;
 public class PointOfInterest
 {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@ManyToMany
-	@JoinTable(name = "pois_types")
+	@JoinTable(name = "pois_types", joinColumns = @JoinColumn(name = "pois_id"))
 	// TODO: test if this should be enabled:
 	// @JoinTable(name = "pois_types", indexes = { @Index(name = "poi_type",
 	// columnList = "types_id") })

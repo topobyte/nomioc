@@ -23,12 +23,14 @@ import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
+import org.hibernate.tool.schema.TargetType;
 import org.locationtech.jts.geom.Geometry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +59,6 @@ import de.topobyte.osm4j.utils.OsmFileInput;
 import de.topobyte.processutils.ProcessLogger;
 import de.topobyte.sqlitespatial.StatsTableManipulator;
 import de.topobyte.sqliteutils.SqliteUtil;
-import de.topobyte.various.utils.tasks.TaskException;
 
 /**
  * @author Sebastian Kuerten (sebastian.kuerten@fu-berlin.de)
@@ -148,9 +149,10 @@ public class CreateDatabase
 		sfOutput = androidSessionFactory.getSessionFactory();
 
 		logger.info("creating target schema");
-		SchemaExport schemaExport = new SchemaExport(
-				androidSessionFactory.getConfiguration());
-		schemaExport.create(true, true);
+		SchemaExport schemaExport = new SchemaExport();
+		// Add TargetType.STDOUT for debugging
+		schemaExport.create(EnumSet.of(TargetType.DATABASE),
+				androidSessionFactory.getMetadata());
 
 		logger.info("transfering admin entity instances");
 		sfOutput.getCurrentSession().beginTransaction();
@@ -187,8 +189,7 @@ public class CreateDatabase
 		sfOutput.getCurrentSession().getTransaction().commit();
 	}
 
-	public void execute()
-			throws IOException, DatabaseCreationException, TaskException
+	public void execute() throws IOException, DatabaseCreationException
 	{
 		Map<Set<Borough>, BoroughSet> boroughSets = new HashMap<>();
 		Map<Set<PostalCode>, PostalCodeSet> postalCodeSets = new HashMap<>();

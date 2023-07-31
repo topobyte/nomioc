@@ -36,9 +36,11 @@ dependencies {
     api 'de.topobyte:sqlite-spatial:0.2.0'
     api 'de.topobyte:sqlite-utils:0.1.0'
     api 'de.topobyte:various-utils:0.1.0'
-    api 'de.topobyte:hibernate-sqlite:0.1.0'
     api 'de.topobyte:diacritic-utils:0.1.0'
     api 'de.topobyte:jts-utils:0.4.0'
+
+    api 'org.hibernate:hibernate-core:5.6.15.Final'
+    api 'com.github.gwenn:sqlite-dialect:0.1.4'
 
     api 'com.jakewharton.fliptables:fliptables:1.0.2'
 

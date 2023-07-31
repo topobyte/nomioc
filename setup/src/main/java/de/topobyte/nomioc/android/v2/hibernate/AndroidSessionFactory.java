@@ -19,9 +19,21 @@ package de.topobyte.nomioc.android.v2.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
+import de.topobyte.nomioc.android.v2.model.hibernate.Borough;
+import de.topobyte.nomioc.android.v2.model.hibernate.BoroughSet;
+import de.topobyte.nomioc.android.v2.model.hibernate.PoiType;
+import de.topobyte.nomioc.android.v2.model.hibernate.PointOfInterest;
+import de.topobyte.nomioc.android.v2.model.hibernate.PostalCode;
+import de.topobyte.nomioc.android.v2.model.hibernate.PostalCodeSet;
+import de.topobyte.nomioc.android.v2.model.hibernate.SpatialIndexItemPoi;
+import de.topobyte.nomioc.android.v2.model.hibernate.SpatialIndexItemStreet;
+import de.topobyte.nomioc.android.v2.model.hibernate.Street;
 
 /**
  * @author Sebastian Kuerten (sebastian.kuerten@fu-berlin.de)
@@ -32,6 +44,7 @@ public class AndroidSessionFactory
 	private StandardServiceRegistry serviceRegistry;
 	private SessionFactory sessionFactory;
 	private Configuration cfg = new Configuration();
+	private Metadata metadata;
 
 	/**
 	 * Create a new instance of TheSessionfactory.
@@ -51,7 +64,19 @@ public class AndroidSessionFactory
 		serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(cfg.getProperties()).build();
 
-		sessionFactory = cfg.buildSessionFactory(serviceRegistry);
+		MetadataSources ms = new MetadataSources(serviceRegistry);
+		ms.addAnnotatedClass(Borough.class);
+		ms.addAnnotatedClass(BoroughSet.class);
+		ms.addAnnotatedClass(PostalCode.class);
+		ms.addAnnotatedClass(PostalCodeSet.class);
+		ms.addAnnotatedClass(Street.class);
+		ms.addAnnotatedClass(PoiType.class);
+		ms.addAnnotatedClass(PointOfInterest.class);
+		ms.addAnnotatedClass(SpatialIndexItemStreet.class);
+		ms.addAnnotatedClass(SpatialIndexItemPoi.class);
+
+		metadata = ms.buildMetadata();
+		sessionFactory = metadata.getSessionFactoryBuilder().build();
 	}
 
 	/**
@@ -60,6 +85,11 @@ public class AndroidSessionFactory
 	public void rebuild()
 	{
 		sessionFactory = cfg.buildSessionFactory(serviceRegistry);
+	}
+
+	public Metadata getMetadata()
+	{
+		return metadata;
 	}
 
 	/**

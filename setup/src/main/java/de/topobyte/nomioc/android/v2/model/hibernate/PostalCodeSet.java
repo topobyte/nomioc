@@ -22,6 +22,8 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -37,6 +39,7 @@ public class PostalCodeSet
 	private int id;
 
 	@ManyToMany
+	@JoinTable(joinColumns = @JoinColumn(name = "postal_code_sets_id"))
 	private Set<PostalCode> codes;
 
 	public PostalCodeSet()
